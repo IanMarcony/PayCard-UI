@@ -1,5 +1,5 @@
 import styled from "styled-components";
-// import { shade } from "polished";
+import { shade } from "polished";
 
 export const Container = styled.div`
   width: 100%;
@@ -88,7 +88,31 @@ export const SwitchThemeArea = styled.div`
   top: 5%;
   right: 2%;
 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  button {
+    width: 20px;
+    height: 20px;
+    margin-top: 6px;
+    border: 0;
+
+    border-radius: 50%;
+    background: rgb(79, 14, 107);
+    background: linear-gradient(
+      45deg,
+      rgba(79, 14, 107, 1) 0%,
+      rgba(140, 4, 150, 1) 50%,
+      rgba(196, 11, 223, 1) 100%
+    );
+
+    &:hover {
+      background: ${shade(0.2, "rgb(79, 14, 107)")};
+    }
+  }
+
   > input {
+    cursor: pointer;
     display: block;
     margin-bottom: 1.5em;
   }
@@ -272,13 +296,8 @@ export const Ball1DarkMode = styled.div`
   top: 20%;
   right: 40%;
   border-radius: 50%;
-  background: rgb(79, 14, 107);
-  background: linear-gradient(
-    45deg,
-    rgba(79, 14, 107, 1) 0%,
-    rgba(140, 4, 150, 1) 50%,
-    rgba(196, 11, 223, 1) 100%
-  );
+  background: ${(props) => props.theme.ball.background};
+  background: ${(props) => props.theme.ball.backgroundGradient};
 `;
 
 export const Ball2DarkMode = styled.div`
@@ -289,11 +308,6 @@ export const Ball2DarkMode = styled.div`
   top: -10%;
   right: -10%;
   border-radius: 50%;
-  background: rgb(79, 14, 107);
-  background: linear-gradient(
-    45deg,
-    rgba(79, 14, 107, 1) 0%,
-    rgba(140, 4, 150, 1) 50%,
-    rgba(196, 11, 223, 1) 100%
-  );
+  background: ${(props) => props.theme.ball.background};
+  background: ${(props) => props.theme.ball.backgroundGradient};
 `;

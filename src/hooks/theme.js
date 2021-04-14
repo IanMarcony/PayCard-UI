@@ -4,16 +4,12 @@ const ThemeContext = createContext({});
 
 const ThemeProvider = ({ children }) => {
   const [globalTheme, setGlobalTheme] = useState(() => {
-    const color = localStorage.getItem("@paycard:color-global");
-    const backgroundColor = localStorage.getItem(
-      "@paycard:backgroundColor-global"
+    const globalThemeStoraged = JSON.parse(
+      localStorage.getItem("@paycard:global-theme")
     );
 
-    if (color && backgroundColor) {
-      return {
-        color,
-        backgroundColor,
-      };
+    if (globalThemeStoraged) {
+      return globalThemeStoraged;
     }
 
     return {
@@ -54,28 +50,38 @@ const ThemeProvider = ({ children }) => {
         backgroundColor: "#a500a8",
       },
       hasBall: false,
+      ball: {
+        background: "rgb(79, 14, 107)",
+        backgroundGradient:
+          "linear-gradient(45deg,rgba(79, 14, 107, 1) 0%, rgba(140, 4, 150, 1) 50%,rgba(196, 11, 223, 1)100%)",
+      },
     };
   });
 
-  const changeGlobalTheme = useCallback((isLight) => {
-    setGlobalTheme({
+  const changeGlobalTheme = useCallback((isLight, thirdOption = false) => {
+    const typeGlobalTheme = {
       color: isLight ? "#000" : "#fff",
-      backgroundColor: isLight ? "#FFF" : "#393636",
-    });
+      backgroundColor: !thirdOption
+        ? isLight
+          ? "#FFF"
+          : "#393636"
+        : "linear-gradient(180deg, rgba(176,12,157,1) 0%, rgba(129,20,162,1) 35%, rgba(82,28,167,1) 100%);",
+    };
+    setGlobalTheme(typeGlobalTheme);
 
-    localStorage.setItem("@paycard:color-global", isLight ? "#000" : "#fff");
     localStorage.setItem(
-      "@paycard:backgroundColor-global",
-      isLight ? "#E5E5E5" : "#393636"
+      "@paycard:global-theme",
+      JSON.stringify(typeGlobalTheme)
     );
+
     localStorage.setItem("@paycard:checked", String(isLight));
   }, []);
 
-  const changeTheme = useCallback((isLight) => {
+  const changeTheme = useCallback((isLight, thirdOption = false) => {
     const typeTheme = {
       titleArea: {
         first: isLight ? "#a500a8" : "#FFF",
-        second: isLight ? "#000" : "#9039AE",
+        second: !thirdOption ? (isLight ? "#000" : "#9039AE") : "#F478E8",
       },
       formCard: {
         button: {
@@ -89,16 +95,24 @@ const ThemeProvider = ({ children }) => {
         },
         input: {
           color: isLight ? "#000" : "#fff",
-          backgroundColor: isLight
-            ? "rgba(198, 198, 199, 0.55)"
-            : "rgba(82, 80, 89, 0.55)",
-          borderColor: isLight ? "#c1c1c1" : "#000",
+          backgroundColor: !thirdOption
+            ? isLight
+              ? "rgba(198, 198, 199, 0.55)"
+              : "rgba(82, 80, 89, 0.55)"
+            : "rgba(35, 0, 145, 0.55)",
+          borderColor: !thirdOption ? (isLight ? "#c1c1c1" : "#000") : "#0000",
         },
       },
       cardArea: {
         backgroundColor: isLight ? "#a500a8" : "rgba(255, 255, 255, 0.51)",
       },
       hasBall: isLight ? false : true,
+      ball: {
+        background: !thirdOption ? "rgb(79, 14, 107)" : "rgb(254,182,56)",
+        backgroundGradient: !thirdOption
+          ? "linear-gradient(45deg,rgba(79, 14, 107, 1) 0%, rgba(140, 4, 150, 1) 50%,rgba(196, 11, 223, 1)100%)"
+          : "linear-gradient(45deg, rgba(254,186,54,1) 0%, rgba(248,70,114,1) 34%, rgba(244,8,146,1) 48%, rgba(210,34,162,1) 61%, rgba(47,193,219,1) 100%)",
+      },
     };
     setTheme(typeTheme);
 

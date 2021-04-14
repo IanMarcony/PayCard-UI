@@ -35,9 +35,19 @@ function Home() {
     [changeGlobalTheme, changeTheme]
   );
 
+  const handleThemeThird = useCallback(
+    (checked) => {
+      setIsChecked(false);
+      changeGlobalTheme(checked, true);
+      changeTheme(checked, true);
+    },
+    [changeGlobalTheme, changeTheme]
+  );
+  console.log(theme);
+
   return (
     <Container>
-      {theme.hasBall && <Ball2DarkMode />}
+      {theme.hasBall && <Ball2DarkMode theme={theme} />}
       <SwitchThemeArea>
         <input
           class="l"
@@ -45,8 +55,10 @@ function Home() {
           checked={isChecked}
           onChange={(event) => handleTheme(event.target.checked)}
         />
+
+        <button type="button" onClick={() => handleThemeThird()}></button>
       </SwitchThemeArea>
-      {theme.hasBall && <Ball1DarkMode />}
+      {theme.hasBall && <Ball1DarkMode theme={theme} />}
       <CardArea theme={theme}>
         <BrandCard>
           <div id="red-circle"></div>
