@@ -8,14 +8,24 @@ export default createGlobalStyle`
     box-sizing: border-box;
   }
 
+  #root{
+    width: 100%;
+    height: 100vh;
+    padding: 10px 80px;
+  }
+
   body{
-    background: #E5E5E5;
-    /* -webkit-font-smoothing: antialiased; */
-    color: #000;
-    font: 16px 400 'Roboto', sans-serif;
+    overflow-x: hidden;
+    background: ${(props) => props.theme.backgroundColor};
+    -webkit-font-smoothing: antialiased;
+    color: ${(props) => props.theme.color};
+    font-family:  'Source Sans Pro',
+    sans-serif;
+    font-size: 16px;
   }
 
   h1,h2,h3,h4,h5{
+    font-size: 54px;
     font-weight: 700;
   }
 
