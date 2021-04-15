@@ -10,7 +10,7 @@ export default createGlobalStyle`
 
   #root{
     width: 100%;
-    height: 100vh;
+    height: 100%;
     padding: 10px 80px;
   }
 
