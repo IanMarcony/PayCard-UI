@@ -3,6 +3,11 @@ import React, { useState, useContext, createContext, useCallback } from "react";
 const ThemeContext = createContext({});
 
 const ThemeProvider = ({ children }) => {
+  const [isActiveSelector, setIsActiveSelector] = useState(false);
+  const toggleSelector = useCallback(() => {
+    setIsActiveSelector(!isActiveSelector);
+  }, [isActiveSelector]);
+
   const [globalTheme, setGlobalTheme] = useState(() => {
     const globalThemeStoraged = JSON.parse(
       localStorage.getItem("@paycard:global-theme")
@@ -55,6 +60,8 @@ const ThemeProvider = ({ children }) => {
         backgroundGradient:
           "linear-gradient(45deg,rgba(79, 14, 107, 1) 0%, rgba(140, 4, 150, 1) 50%,rgba(196, 11, 223, 1)100%)",
       },
+      isLight: true,
+      thirdOption: false,
     };
   });
 
@@ -114,6 +121,7 @@ const ThemeProvider = ({ children }) => {
           : "linear-gradient(45deg, rgba(254,186,54,1) 0%, rgba(248,70,114,1) 34%, rgba(244,8,146,1) 48%, rgba(210,34,162,1) 61%, rgba(47,193,219,1) 100%)",
       },
       isLight,
+      thirdOption,
     };
     setTheme(typeTheme);
 
@@ -122,7 +130,14 @@ const ThemeProvider = ({ children }) => {
 
   return (
     <ThemeContext.Provider
-      value={{ globalTheme, changeGlobalTheme, theme, changeTheme }}
+      value={{
+        globalTheme,
+        changeGlobalTheme,
+        theme,
+        changeTheme,
+        toggleSelector,
+        isActiveSelector,
+      }}
     >
       {children}
     </ThemeContext.Provider>

@@ -1,7 +1,13 @@
 import styled from "styled-components";
 import { shade } from "polished";
 
-export const Container = styled.div``;
+export const Container = styled.div`
+  padding: 10px 80px;
+
+  @media (max-width: 850px) {
+    padding: 10px 20px;
+  }
+`;
 
 export const TitleArea = styled.div`
   margin-top: 10px;

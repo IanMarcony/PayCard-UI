@@ -26,7 +26,7 @@ function Home() {
 
     return checked === "true" ? true : false;
   });
-  const { changeGlobalTheme, changeTheme, theme } = useTheme();
+  const { changeGlobalTheme, changeTheme, theme, toggleSelector } = useTheme();
   const handleTheme = useCallback(
     (checked) => {
       setIsChecked(checked);
@@ -48,7 +48,7 @@ function Home() {
   return (
     <Container>
       {theme.hasBall && <Ball2DarkMode theme={theme} />}
-      {windowDimension.width > 900 ? (
+      {windowDimension.width > 850 ? (
         <SwitchThemeArea>
           <input
             class="l"
@@ -60,7 +60,7 @@ function Home() {
           <button type="button" onClick={() => handleThemeThird()}></button>
         </SwitchThemeArea>
       ) : (
-        <LampButton>
+        <LampButton onClick={() => toggleSelector()}>
           <img
             src={theme.isLight ? lampadaBlackIcon : lampadaIcon}
             alt="Trocar Tema"

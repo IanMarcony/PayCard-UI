@@ -11,12 +11,26 @@ export default createGlobalStyle`
   #root{
     width: 100%;
     height: 100vh;
-    padding: 10px 80px;
-
-    @media (max-width: 850px) {
-    padding: 10px 20px;
 
   }
+
+
+  #selector-theme{
+
+    background: ${(props) => props.theme.backgroundColor};
+    color: ${(props) => props.theme.color};
+
+    h1{
+      border-bottom: 1px solid  ${(props) => props.theme.color};
+    }
+
+    button{
+    color: ${(props) => props.theme.color};
+
+    border-bottom: 1px solid  ${(props) => props.theme.color};
+
+    }
+
   }
 
   body{
