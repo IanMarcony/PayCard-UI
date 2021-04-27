@@ -99,7 +99,7 @@ const ThemeProvider = ({ children }) => {
             ? isLight
               ? "rgba(198, 198, 199, 0.55)"
               : "rgba(82, 80, 89, 0.55)"
-            : "rgba(35, 0, 145, 0.55)",
+            : "rgba(55, 0, 144, 0.55)",
           borderColor: !thirdOption ? (isLight ? "#c1c1c1" : "#000") : "#0000",
         },
       },
@@ -113,6 +113,7 @@ const ThemeProvider = ({ children }) => {
           ? "linear-gradient(45deg,rgba(79, 14, 107, 1) 0%, rgba(140, 4, 150, 1) 50%,rgba(196, 11, 223, 1)100%)"
           : "linear-gradient(45deg, rgba(254,186,54,1) 0%, rgba(248,70,114,1) 34%, rgba(244,8,146,1) 48%, rgba(210,34,162,1) 61%, rgba(47,193,219,1) 100%)",
       },
+      isLight,
     };
     setTheme(typeTheme);
 

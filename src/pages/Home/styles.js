@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import { shade } from "polished";
 
-export const Container = styled.div`
-  width: 100%;
-  height: 100%;
-`;
+export const Container = styled.div``;
 
 export const TitleArea = styled.div`
   margin-top: 10px;
@@ -17,12 +14,21 @@ export const TitleArea = styled.div`
       font-size: 45px;
     }
   }
+  @media (max-width: 850px) {
+    h1 {
+      font-size: 30px;
+
+      & + h1 {
+        font-size: 25px;
+      }
+    }
+  }
 `;
 
 export const FormCard = styled.form`
-  /* width: 100%; */
-  max-width: 700px;
-  margin-top: 280px;
+  width: 100%;
+
+  margin-top: 22%;
 
   display: flex;
   flex-direction: column;
@@ -53,11 +59,43 @@ export const FormCard = styled.form`
       opacity: 0.8;
     }
   }
+
+  @media (max-width: 850px) {
+    margin-top: 22%;
+
+    justify-content: center;
+
+    span {
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    span:first-child {
+      flex-direction: column;
+      margin-left: 0;
+      > div {
+        margin-left: 0;
+      }
+    }
+
+    #second-line-form {
+      align-items: center;
+
+      #second-line-input {
+        margin-bottom: 6px;
+      }
+    }
+
+    button {
+      width: 100%;
+    }
+  }
 `;
 
 export const InputArea = styled.div`
   display: flex;
   flex-direction: column;
+
   & + div {
     margin-left: 10px;
   }
@@ -78,6 +116,15 @@ export const InputArea = styled.div`
 
     border: 1px solid ${(props) => props.theme.inputArea.input.borderColor};
     border-radius: 5px;
+  }
+
+  @media (max-width: 850px) {
+    & + div {
+      margin-top: 10px;
+    }
+    input {
+      width: 100%;
+    }
   }
 `;
 
@@ -191,107 +238,13 @@ export const SwitchThemeArea = styled.div`
   }
 `;
 
-//Card
-
-export const CardArea = styled.div`
-  position: absolute;
-  width: 548.73px;
-  height: 261.72px;
-  right: 2%;
-  top: 8%;
-
-  background: ${(props) => props.theme.cardArea.backgroundColor};
-  border-radius: 25px;
-  transform: rotate(11.5deg);
-
-  padding: 20px;
-
-  color: #fff;
-`;
-
-export const BrandCard = styled.div`
-  display: flex;
-  #red-circle {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: #d53333;
-  }
-
-  #yellow-circle {
-    position: relative;
-    left: -15px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: rgba(234, 153, 33, 0.75);
-  }
-`;
-
-export const CardNumberArea = styled.div`
-  width: 100%;
-  margin-top: 20px;
-
-  h1 {
-    font-size: 18px;
-    font-weight: 400;
-  }
-
-  > div {
-    display: flex;
-    align-items: center;
-    margin-top: 5px;
-
-    margin-left: 15px;
-
-    #group {
-      display: flex;
-      align-items: center;
-
-      > div {
-        margin-top: 10px;
-        width: 10px;
-        height: 10px;
-        border-radius: 50%;
-        background: #fff;
-
-        & + div {
-          margin-left: 10px;
-        }
-      }
-    }
-    #group + #group {
-      margin-left: 40px;
-    }
-  }
-`;
-
-export const CVVNumberCard = styled.div`
-  margin-left: 80px;
-  margin-top: 10px;
-  font-size: 20px;
-  font-weight: 400;
-`;
-
-export const MoreInfoCard = styled.div`
-  width: max-content;
-  padding-top: 10px;
-  padding-left: 70%;
-  display: flex;
-  flex-direction: column;
-`;
-
-export const NameCard = styled.h1`
-  font-weight: 400;
-  font-size: 18px;
-  line-height: 25px;
-`;
-
 //Balls for DarkMode
 
 export const Ball1DarkMode = styled.div`
   width: 200px;
   height: 200px;
+  z-index: -10;
+
   position: absolute;
 
   top: 20%;
@@ -299,6 +252,17 @@ export const Ball1DarkMode = styled.div`
   border-radius: 50%;
   background: ${(props) => props.theme.ball.background};
   background: ${(props) => props.theme.ball.backgroundGradient};
+
+  @media (max-width: 850px) {
+    width: 60px;
+    height: 60px;
+  }
+
+  @media (max-width: 450px) {
+    top: 14%;
+    width: 25px;
+    height: 25px;
+  }
 `;
 
 export const Ball2DarkMode = styled.div`
@@ -306,9 +270,32 @@ export const Ball2DarkMode = styled.div`
   height: 500px;
   position: absolute;
 
+  z-index: -10;
+
   top: -10%;
   right: -10%;
   border-radius: 50%;
   background: ${(props) => props.theme.ball.background};
   background: ${(props) => props.theme.ball.backgroundGradient};
+
+  @media (max-width: 850px) {
+    width: 300px;
+    height: 300px;
+  }
+
+  @media (max-width: 450px) {
+    width: 180px;
+    height: 180px;
+  }
+`;
+
+export const LampButton = styled.button`
+  font-size: 0;
+  background: transparent;
+  border: 0;
+  outline: 0;
+  transition: filter 0.2s;
+  &:hover {
+    filter: brightness(0.9);
+  }
 `;

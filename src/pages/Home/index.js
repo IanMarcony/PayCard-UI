@@ -1,25 +1,26 @@
 import React, { useCallback, useState } from "react";
 
 import InputMask from "react-input-mask";
+import CreditCard from "../../components/CreditCard";
+import lampadaIcon from "../../assets/images/lampada.svg";
+import lampadaBlackIcon from "../../assets/images/lampada-black.svg";
 import { useTheme } from "../../hooks/theme";
+import useWindowDimensions from "../../hooks/window";
 
 import {
   Container,
   TitleArea,
   FormCard,
   InputArea,
-  CardArea,
-  BrandCard,
-  CardNumberArea,
-  MoreInfoCard,
-  CVVNumberCard,
-  NameCard,
   SwitchThemeArea,
+  LampButton,
   Ball1DarkMode,
   Ball2DarkMode,
 } from "./styles";
 
 function Home() {
+  const windowDimension = useWindowDimensions();
+
   const [isChecked, setIsChecked] = useState(() => {
     const checked = localStorage.getItem("@paycard:checked");
 
@@ -43,64 +44,42 @@ function Home() {
     },
     [changeGlobalTheme, changeTheme]
   );
-  console.log(theme);
 
   return (
     <Container>
       {theme.hasBall && <Ball2DarkMode theme={theme} />}
-      <SwitchThemeArea>
-        <input
-          class="l"
-          type="checkbox"
-          checked={isChecked}
-          onChange={(event) => handleTheme(event.target.checked)}
-        />
+      {windowDimension.width > 900 ? (
+        <SwitchThemeArea>
+          <input
+            class="l"
+            type="checkbox"
+            checked={isChecked}
+            onChange={(event) => handleTheme(event.target.checked)}
+          />
 
-        <button type="button" onClick={() => handleThemeThird()}></button>
-      </SwitchThemeArea>
+          <button type="button" onClick={() => handleThemeThird()}></button>
+        </SwitchThemeArea>
+      ) : (
+        <LampButton>
+          <img
+            src={theme.isLight ? lampadaBlackIcon : lampadaIcon}
+            alt="Trocar Tema"
+          />
+        </LampButton>
+      )}
       {theme.hasBall && <Ball1DarkMode theme={theme} />}
-      <CardArea theme={theme}>
-        <BrandCard>
-          <div id="red-circle"></div>
-          <div id="yellow-circle"></div>
-        </BrandCard>
-        <CardNumberArea>
-          <h1>CARD NUMBER</h1>
-          <div>
-            <div id="group">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-            <div id="group">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-            <div id="group">
-              <div></div>
-              <div></div>
-              <div></div>
-              <div></div>
-            </div>
-            <CVVNumberCard>1234</CVVNumberCard>
-          </div>
-          <MoreInfoCard>
-            <h1>VALID THROUGH</h1>
-            <span>01/28</span>
-          </MoreInfoCard>
-        </CardNumberArea>
 
-        <NameCard>John Doe</NameCard>
-      </CardArea>
+      <CreditCard />
       <TitleArea theme={theme}>
         <h1>Let's play</h1>
         <h1>It's easy</h1>
       </TitleArea>
       <FormCard theme={theme}>
         <span>
+          <InputArea theme={theme}>
+            <label htmlFor="name">Name</label>
+            <input id="name" type="text" />
+          </InputArea>
           <InputArea theme={theme}>
             <label htmlFor="card-number">Card Number</label>
             <InputMask
@@ -110,6 +89,8 @@ function Home() {
               alwaysShowMask={true}
             />
           </InputArea>
+        </span>
+        <span id="second-line-form">
           <InputArea theme={theme}>
             <label htmlFor="valid-until">Valid Until</label>
             <InputMask
@@ -119,13 +100,7 @@ function Home() {
               alwaysShowMask={true}
             />
           </InputArea>
-        </span>
-        <span>
-          <InputArea theme={theme}>
-            <label htmlFor="name">Name</label>
-            <input id="name" type="text" />
-          </InputArea>
-          <InputArea theme={theme}>
+          <InputArea id="second-line-input" theme={theme}>
             <label htmlFor="cvv">CVV</label>
             <InputMask
               id="cvv"
@@ -137,7 +112,7 @@ function Home() {
           </InputArea>
         </span>
 
-        <button type="button">ENTER</button>
+        <button type="button">Pay Now</button>
       </FormCard>
     </Container>
   );
